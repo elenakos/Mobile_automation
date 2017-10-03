@@ -1,0 +1,110 @@
+import os
+import unittest
+from appium import webdriver
+from appium.webdriver.common.touch_action import TouchAction
+from time import sleep
+
+'''
+Calculator Page Object class
+'''
+
+class CalculatorUI:
+    
+
+    def __init__(self, driver):
+         self.driver = driver
+         # all elements from the Page
+         self.DIGIT_0 = driver.find_element_by_id('digit_0')
+         self.DIGIT_1 = driver.find_element_by_id('digit_1')
+         self.DIGIT_2 = driver.find_element_by_id('digit_2')
+         self.DIGIT_3 = driver.find_element_by_id('digit_3')
+         self.DIGIT_4 = driver.find_element_by_id('digit_4')
+         self.DIGIT_5 = driver.find_element_by_id('digit_5')
+         self.DIGIT_6 = driver.find_element_by_id('digit_6')
+         self.DIGIT_7 = driver.find_element_by_id('digit_7')
+         self.DIGIT_8 = driver.find_element_by_id('digit_8')
+         self.DIGIT_9 = driver.find_element_by_id('digit_9')
+         self.OPERATION_PLUS = driver.find_element_by_id('op_add')
+         self.OPERATION_MINUS = driver.find_element_by_id('op_sub')
+         self.OPERATION_DIVIDE = driver.find_element_by_id('op_div')
+         self.OPERATION_MULTIPLY = driver.find_element_by_id('op_mul')
+    
+         self.ARROW = driver.find_element_by_id('arrow')
+         
+    
+         self.OPERATION_DEL = driver.find_element_by_id('del')
+        
+         self.OPERATION_EQUAL = driver.find_element_by_id('eq')
+         self.DECIMAL_POINT = driver.find_element_by_id('dec_point') 
+     
+         self.FORMULA = driver.find_element_by_id('formula')
+         self.RESULT = driver.find_element_by_id('result')
+
+
+
+    
+    def enter_number(self, number):
+        for i in range(len(number)):
+            if number[i].isdigit():
+                if int(number[i]) == 0:
+                    self.DIGIT_0.click()
+                if int(number[i]) == 1:
+                    self.DIGIT_1.click()
+                if int(number[i]) == 2:
+                    self.DIGIT_2.click()
+                if int(number[i]) == 3:
+                    self.DIGIT_3.click()
+                if int(number[i]) == 4:
+                    self.DIGIT_4.click()
+                if int(number[i]) == 5:
+                    self.DIGIT_5.click()
+                if int(number[i]) == 6:
+                    self.DIGIT_6.click()
+                if int(number[i]) == 7:
+                    self.DIGIT_7.click()
+                if int(number[i]) == 8:
+                    self.DIGIT_8.click()
+                if int(number[i]) == 9:
+                    self.DIGIT_9.click()
+            else:
+                self.DECIMAL_POINT.click() 
+                     
+    
+    def enter_math_operation(self, operation):
+        if operation == "+":
+            self.OPERATION_PLUS.click()
+        elif operation == "-":
+            self.OPERATION_MINUS.click()
+        elif operation == "/":
+            self.OPERATION_DIVIDE.click()
+        elif operation == "x":
+            self.OPERATION_MULTIPLY.click()
+ 
+            
+
+    def click_square_root(self):   
+        self.open_advanced_operations_window() 
+        SQUARE_ROOT = self.driver.find_element_by_id('op_sqrt')
+        SQUARE_ROOT.click()
+        self.close_advanced_operations_window()
+        
+
+    def open_advanced_operations_window(self):
+        self.ARROW.click()  
+        
+
+    def close_advanced_operations_window(self):
+        swipe = TouchAction(self.driver)
+        swipe.press(x=275, y=1280).move_to(x=689, y=10).release().perform()          
+            
+
+    def enter_equal(self):
+        self.OPERATION_EQUAL.click()
+        
+
+    def get_result(self):
+        return self.RESULT.text
+    
+
+    def get_formula(self):
+        return self.FORMULA.text
