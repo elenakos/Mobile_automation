@@ -1,0 +1,77 @@
+import os
+import unittest
+from appium import webdriver
+from appium.webdriver.common.touch_action import TouchAction
+from time import sleep
+
+from CalculatorUI import CalculatorUI
+
+
+class CalculatorAndroidTests(unittest.TestCase):
+
+    def setUp(self):
+        desired_capabilities = {}
+        desired_capabilities['platformName'] = 'Android'
+        desired_capabilities['platformVersion'] = '7.0'
+        desired_capabilities['deviceName'] = 'Moto_G__5__Plus'
+        desired_capabilities['appPackage'] = 'com.google.android.calculator'
+        desired_capabilities['appActivity'] = 'com.android.calculator2.Calculator'
+        self.driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_capabilities)    
+        sleep(2)
+        self.calc = CalculatorUI(self.driver) 
+
+    def tearDown(self):
+        self.driver.quit()
+
+    def test_square_root_operation_for_valid_input_returns_valid_result(self):
+        self.calc.click_square_root()
+        self.calc.enter_number('9')
+        self.calc.enter_equal()
+        result = self.calc.get_result()
+        self.assertIn('3', result)
+            
+        
+    def test_addition_opearation_for_valid_input_integers_returns_valid_integer_result(self):
+        self.calc.enter_number('7')
+        self.calc.enter_math_operation("+")
+        f = self.calc.get_formula()
+        self.assertIn('7+', f)
+        self.calc.enter_number('3')
+        f = self.calc.get_formula()
+        self.assertIn('7+3', f)
+        result = self.calc.get_result()
+        self.assertIn('10', result)
+        self.calc.enter_equal()
+        result = self.calc.get_result()
+        self.assertIn('10', result)
+        
+
+    def test_addition_opearation_for_valid_input_floats_returns_valid_float_result(self):
+        self.calc.enter_number('24.6')
+        self.calc.enter_math_operation("+")
+        f = self.calc.get_formula()
+        self.assertIn('24.6+', f)
+        self.calc.enter_number('810.5')
+        f = self.calc.get_formula()
+        self.assertIn('24.6+810.5', f)
+        result =  self.calc.get_result()
+        self.assertIn('835.1', result)
+        self.calc.enter_equal()
+        result = self.calc.get_result()
+        self.assertIn('835.1', result)
+
+
+    def test_subtraction_opearation_for_valid_input_integers_returns_valid_integer_result(self):
+        self.calc.enter_number('99')
+        self.calc.enter_math_operation('-')
+        self.calc.enter_number('3')
+        result = self.calc.get_result()
+        self.assertEqual('96', result)
+        self.calc.enter_equal()
+        result = self.calc.get_result()
+        self.assertEqual('96', result)
+        
+
+if __name__ == '__main__':
+    suite = unittest.TestLoader().loadTestsFromTestCase(CalculatorAndroidTests)
+    unittest.TextTestRunner(verbosity=2).run(suite)
