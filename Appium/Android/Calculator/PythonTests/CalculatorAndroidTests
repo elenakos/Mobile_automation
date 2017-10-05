@@ -20,10 +20,10 @@ class CalculatorAndroidTests(unittest.TestCase):
         desired_capabilities['appPackage'] = self.calcSetup.APP_PACKAGE
         desired_capabilities['appActivity'] = self.calcSetup.APP_ACTIVITY
         self.driver = webdriver.Remote(self.calcSetup.HOST, desired_capabilities)            
-        # To make sure that an advance operation pad is closed and a calculator pad is visible
-        WebDriverWait(self.driver, 30).until(EC.invisibility_of_element_located((By.ID, 'op_sqrt')))
         self.calc = CalculatorPOM(self.driver) 
-
+        # To make sure that an advance operation pad is closed and a calculator pad is visible
+        WebDriverWait(self.driver, self.calcSetup.EXPLICIT_WAIT_SECONDS).until(EC.invisibility_of_element_located((By.ID, self.calc.SQUARE_ROOT)))
+        
     def tearDown(self):
         self.driver.quit()
 
