@@ -9,7 +9,7 @@ Calculator Page Object class
 '''
 
 class CalculatorPOM:
-     # all elements from the page as defined in the  code
+    # all elements from the page as defined in the  code
     DIGIT_0 = 'digit_0'
     DIGIT_1 = 'digit_1'
     DIGIT_2 = 'digit_2'
@@ -56,12 +56,11 @@ class CalculatorPOM:
          self.area_formula = driver.find_element_by_id(self.FORMULA)
          self.area_result = driver.find_element_by_id(self.RESULT)
 
-
     def enter_number(self, number):
-        # Verify valid number
+        # Verify if a number is valid
         num_format = re.compile(r'^\-?[1-9][0-9]*\.?[0-9]*')
-        if not re.match(num_format,number):
-            return 
+        assert re.match(num_format,number), "Please provide a valid number to enter"
+
         numbers = [self.button_0, self.button_1, self.button_2, self.button_3, self.button_4,  
                    self.button_5, self.button_6, self.button_7, self.button_8, self.button_9]
         for i in range(len(number)):
