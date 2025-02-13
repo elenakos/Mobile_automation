@@ -9,8 +9,11 @@ Steps to start Appium-python automation
 8) Connect a mobile device to your computer
 9) Turn on developer options on the android device.
 10) Open this project in PyCharm
+11) Select CalculatorAndroidTests and hit the Run button
 
-Open two terminal tabs:
+Tips:
+
+Open two terminals:
 1) Start appium in the first tab
 2) Use the second window for adb commands or python
 
@@ -18,7 +21,7 @@ To find all devices attached to your computer:
 `adb devices -l`
 
 To find a package name for your Android application; in this case Calculator:
-`adb shell 'pm list packages' | grep 'calcul'`
+`adb shell 'pm list packages' | grep 'calculator'`
 
 Reply:
 `package:com.google.android.calculator`
@@ -33,3 +36,4 @@ Reply:
 To find identifiers for elements in your application, open your application on your device and start Appium Inspector session
 ![img_1.png](img_1.png)
 ![img.png](img.png)
+
