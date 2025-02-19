@@ -10,6 +10,8 @@ Steps to start Appium-python automation
 9) Turn on developer options on the android device.
 10) Open this project in PyCharm
 11) Select CalculatorAndroidTests and hit the Run button
+
+
 ![Test_case_1_small.gif](Test_case_1_small.gif)
 
 Tips:
