@@ -1,4 +1,6 @@
-Steps to start Appium-python automation
+This repository contains sample test cases for Android Calculator implemented with the Appium Python client.
+
+### Steps to start Appium-python automation
 1) Install node.js since appium is a web server written in Node.JS: 'brew install node'
 2) Install Appium: 'npm install -g appium'
 3) Install a web driver: 'npm install wd'
@@ -14,29 +16,41 @@ Steps to start Appium-python automation
 
 ![Test_case_1_small.gif](Test_case_1_small.gif)
 
-Tips:
+### Tips:
 
 Open two terminals:
-1) Start appium in the first tab
+1) Start Appium server in the first tab
 2) Use the second window for adb commands or python
 
-To find all devices attached to your computer:
-`adb devices -l`
+**To find all devices attached to your computer:**
+```
+adb devices -l
+```
 
-To find a package name for your Android application; in this case Calculator:
-`adb shell 'pm list packages' | grep 'calculator'`
-
-Reply:
-`package:com.google.android.calculator`
-
-To find an active application:
-`adb shell dumpsys window windows | grep -E 'mCurrentFocus|mFocusedApp'`
+**To find a package name for your Android application; in this case Calculator:**
+```
+adb shell 'pm list packages' | grep 'calculator'
+```
 
 Reply:
-  `mCurrentFocus=Window{7f49c61 u0 com.google.android.calculator/com.android.calculator2.Calculator}`
-  `mFocusedApp=AppWindowToken{7a594f1 token=Token{8e91e7b ActivityRecord{86e0675 u0 com.google.android.calculator/com.android.calculator2.Calculator t851}}}`
+```
+package:com.google.android.calculator`
+```
 
-To find identifiers for elements in your application, open your application on your device and start Appium Inspector session
+**To find an active application:**
+```
+adb shell dumpsys window windows | grep -E 'mCurrentFocus|mFocusedApp'
+```
+
+Reply:
+```
+mCurrentFocus=Window{7f49c61 u0 com.google.android.calculator/com.android.calculator2.Calculator}
+mFocusedApp=AppWindowToken{7a594f1 token=Token{8e91e7b ActivityRecord{86e0675 u0 com.google.android.calculator/com.android.calculator2.Calculator t851}}}
+```
+
+**To find identifiers for elements in your application:** 
+
+Open your application on your device and start Appium Inspector session
 ![img_1.png](img_1.png)
 ![img.png](img.png)
 
